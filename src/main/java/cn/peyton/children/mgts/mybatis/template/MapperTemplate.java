@@ -76,14 +76,14 @@ public class MapperTemplate extends BaseTemplate {
      */
     private static void createMapperContent() {
 
-        sb.append("\t/**\r\n");
-        sb.append("\t * <h4>插入 对象</h4>\r\n");
-        sb.append("\t * @param record 对象\r\n");
-        sb.append("\t * @return 受影响的行数\r\n");
-        sb.append("\t */\r\n");
-        sb.append("\tint insert(" + _table.getObjectName() + " record);\r\n");
-        sb.append("\r\n");
-
+        //sb.append("\t/**\r\n");
+        //sb.append("\t * <h4>插入 对象</h4>\r\n");
+        //sb.append("\t * @param record 对象\r\n");
+        //sb.append("\t * @return 受影响的行数\r\n");
+        //sb.append("\t */\r\n");
+        //sb.append("\tint insert(" + _table.getObjectName() + " record);\r\n");
+        //sb.append("\r\n");
+        //  1.
         sb.append("\t/**\r\n");
         sb.append("\t * <h4>插入 对象[根据属性是否有值 插入]</h4>\r\n");
         sb.append("\t * @param record 对象\r\n");
@@ -102,6 +102,7 @@ public class MapperTemplate extends BaseTemplate {
                 break;
             }
         }
+        // 2.
         sb.append("\t/**\r\n");
         sb.append("\t * <h4>根据 主键 删除 对象</h4>\r\n");
         sb.append("\t * @param id 主键\r\n");
@@ -110,14 +111,14 @@ public class MapperTemplate extends BaseTemplate {
         sb.append("\tint deleteByPrimaryKey(" + typeName + " id);\r\n");
         sb.append("\r\n");
 
-        sb.append("\t/**\r\n");
-        sb.append("\t * <h4>更新 对象</h4>\r\n");
-        sb.append("\t * @param record 对象\r\n");
-        sb.append("\t * @return 受影响的行数\r\n");
-        sb.append("\t */\r\n");
-        sb.append("\tint updateByPrimaryKey(" + _table.getObjectName() + " record);\r\n");
-        sb.append("\r\n");
-
+        //sb.append("\t/**\r\n");
+        //sb.append("\t * <h4>更新 对象</h4>\r\n");
+        //sb.append("\t * @param record 对象\r\n");
+        //sb.append("\t * @return 受影响的行数\r\n");
+        //sb.append("\t */\r\n");
+        //sb.append("\tint updateByPrimaryKey(" + _table.getObjectName() + " record);\r\n");
+        //sb.append("\r\n");
+        // 3.
         sb.append("\t/**\r\n");
         sb.append("\t * <h4>更新 对象[根据属性是否有值 更新]</h4>\r\n");
         sb.append("\t * @param record 对象\r\n");
@@ -125,7 +126,7 @@ public class MapperTemplate extends BaseTemplate {
         sb.append("\t */\r\n");
         sb.append("\tint updateByPrimaryKeySelective(" + _table.getObjectName() + " record);\r\n");
         sb.append("\r\n");
-
+        // 4.
         sb.append("\t/**\r\n");
         sb.append("\t * <h4>根据 主键 查找 对象</h4>\r\n");
         sb.append("\t * @param id 主键\r\n");
@@ -134,9 +135,59 @@ public class MapperTemplate extends BaseTemplate {
         sb.append("\t" + _table.getObjectName() + " selectByPrimaryKey(" + typeName + " id);\r\n");
         sb.append("\r\n");
         sb.append("\r\n");
+        // 5.
+        sb.append("\t/**\r\n");
+        sb.append("\t * <h4>分页查询(全部或关键字模糊查找)</h4>\r\n");
+        sb.append("\t * @param keyword 关键字, 当keyword = null 时为全部查询\r\n");
+        sb.append("\t * @param page 分页对象\r\n");
+        sb.append("\t * @return 对象集合\r\n");
+        sb.append("\t */\r\n");
+        sb.append("\tList<" + _table.getObjectName() + "> selectByAllOrKeyword(@Param(\"keyword\") String keyword,@Param(\"page\") PageQuery page);\r\n");
+        sb.append("\r\n");
+        sb.append("\r\n");
+        // 6.
+        sb.append("\t/**\r\n");
+        sb.append("\t * <h4>根据对象条件查找</h4>\r\n");
+        sb.append("\t * @param record 对象\r\n");
+        sb.append("\t * @param page 分页对象\r\n");
+        sb.append("\t * @return 对象集合\r\n");
+        sb.append("\t */\r\n");
+        sb.append("\tList<" + _table.getObjectName() + "> selectByObj(" +  _table.getObjectName() + " record, @Param(\"page\") PageQuery page);\r\n");
+        sb.append("\r\n");
+        sb.append("\r\n");
+        // 7.
+        sb.append("\t/**\r\n");
+        sb.append("\t * <h4>查找全部数量(全部或关键字模糊查找)</h4>\r\n");
+        sb.append("\t * @param keyword 关键字, 当keyword = null 时为全部查询\r\n");
+        sb.append("\t * @return 总条数\r\n");
+        sb.append("\t */\r\n");
+        sb.append("\tint count(@Param(\"keyword\") String keyword);\r\n");
+        sb.append("\r\n");
+        // 8. 判断第一名
+        sb.append("\t/**\r\n");
+        sb.append("\t * <h4>判断是否重名</h4>\r\n");
+        sb.append("\t * @param record 对象\r\n");
+        sb.append("\t * @return 大于0 表示 重名\r\n");
+        sb.append("\t */\r\n");
+        sb.append("\tint isRename(" + _table.getObjectName() + " record);\r\n");
+        sb.append("\r\n");
+
+        // 9. 更新状态
+        sb.append("\t/**\r\n");
+        sb.append("\t * <h4>更新状态</h4>\r\n");
+        sb.append("\t * @param id 主键\r\n");
+        sb.append("\t * @param status 状态值\r\n");
+        sb.append("\t * @return 受影响行数 大于0 表示 成功\r\n");
+        sb.append("\t */\r\n");
+        sb.append("\tint upStatus(@Param(\"id\")" + typeName + " id, @Param(\"status\") Integer status);\r\n");
+        sb.append("\r\n");
+
         sb.append("\t// ==================================== new create method ==================================== //\r\n");
         sb.append("\r\n");
         sb.append("\r\n");
+
+
+
     }
     // ============================================== create Mapper method end =============================================== //
 
@@ -195,7 +246,7 @@ public class MapperTemplate extends BaseTemplate {
         sb.append("\t<sql id=\""+_columnList+"\">\r\n");
         sb.append("\t\t");
         for (int i = 0; i < size; i++) {
-            sb.append(columnList.get(i).getColumnName());
+            sb.append("`" + columnList.get(i).getColumnName() + "`");
             if (i != size - 1) {
                 sb.append(",");
             }
@@ -205,43 +256,43 @@ public class MapperTemplate extends BaseTemplate {
         sb.append("\r\n");
 
         //====================================== create insert =================================//
-        sb.append("\t<insert id=\"insert\" parameterType=\"" + entityPackageName + "." + _table.getObjectName() + "\"" +
-                " keyColumn=\"" + _table.getPrimaryKeyName() + "\" keyProperty=\"" + pkColumn.getFieldName() +
-                "\" useGeneratedKeys=\"true\">\r\n");
-        sb.append("\t\tinsert into " + _table.getTableName() + "(");
-        for (int i = 0; i < size; i++) {
-            if (!pkColumn.getColumnName().equals(columnList.get(i).getColumnName())) {
-                sb.append(columnList.get(i).getColumnName());
-                if (i != size - 1) {
-                    sb.append(",");
-                }
-            }
-
-        }
-        sb.append(")\r\n");
-        sb.append("\t\tvalues (");
-        for (int i = 0; i < size; i++) {
-            if (!pkColumn.getColumnName().equals(columnList.get(i).getColumnName())) {
-                String _property = (columnList.get(i).getFk()) ?
-                        columnList.get(i).getFkExclusiveObjectName() + "." +
-                                columnList.get(i).getFkExclusiveChildFieldName() :
-                        columnList.get(i).getFieldName();
-                sb.append("#{" + _property + "}");
-                if (i != size - 1) {
-                    sb.append(",");
-                }
-            }
-
-        }
-        sb.append(")\r\n");
-        sb.append("\t</insert>\r\n");
-        sb.append("\r\n");
+        //sb.append("\t<insert id=\"insert\" parameterType=\"" + entityPackageName + "." + _table.getObjectName() + "\"" +
+        //        " keyColumn=\"" + _table.getPrimaryKeyName() + "\" keyProperty=\"" + pkColumn.getFieldName() +
+        //        "\" useGeneratedKeys=\"true\">\r\n");
+        //sb.append("\t\tinsert into " + _table.getTableName() + "(");
+        //for (int i = 0; i < size; i++) {
+        //    if (!pkColumn.getColumnName().equals(columnList.get(i).getColumnName())) {
+        //        sb.append(columnList.get(i).getColumnName());
+        //        if (i != size - 1) {
+        //            sb.append(",");
+        //        }
+        //    }
+        //
+        //}
+        //sb.append(")\r\n");
+        //sb.append("\t\tvalues (");
+        //for (int i = 0; i < size; i++) {
+        //    if (!pkColumn.getColumnName().equals(columnList.get(i).getColumnName())) {
+        //        String _property = (columnList.get(i).getFk()) ?
+        //                columnList.get(i).getFkExclusiveObjectName() + "." +
+        //                        columnList.get(i).getFkExclusiveChildFieldName() :
+        //                columnList.get(i).getFieldName();
+        //        sb.append("#{" + _property + "}");
+        //        if (i != size - 1) {
+        //            sb.append(",");
+        //        }
+        //    }
+        //
+        //}
+        //sb.append(")\r\n");
+        //sb.append("\t</insert>\r\n");
+        //sb.append("\r\n");
 
         // ************************** 第二种 插入 ************************** //
         sb.append("\t<insert id=\"insertSelective\" parameterType=\"" + entityPackageName + "." + _table.getObjectName() + "\"" +
                 " keyColumn=\"" + _table.getPrimaryKeyName() + "\" keyProperty=\"" + pkColumn.getFieldName() +
                 "\" useGeneratedKeys=\"true\">\r\n");
-        sb.append("\t\tinsert into " + _table.getTableName() + "\r\n");
+        sb.append("\t\tinsert into `" + _table.getTableName() + "`\r\n");
 
         sb.append("\t\t<trim prefix=\"(\" suffix=\")\" suffixOverrides=\",\">\r\n");
         for (int i = 0; i < size; i++) {
@@ -249,8 +300,8 @@ public class MapperTemplate extends BaseTemplate {
                 String _property = (columnList.get(i).getFk()) ?
                         columnList.get(i).getFkExclusiveObjectName() : columnList.get(i).getFieldName();
                 sb.append("\t\t\t<if test=\"" + _property + " != null\">");
-                sb.append(columnList.get(i).getColumnName());
-                sb.append(",</if>\r\n");
+                sb.append("`" + columnList.get(i).getColumnName());
+                sb.append("`,</if>\r\n");
             }
         }
         sb.append("\t\t</trim>\r\n");
@@ -272,14 +323,14 @@ public class MapperTemplate extends BaseTemplate {
 
         //================================== create delete =====================================//
         sb.append("\t<delete id=\"deleteByPrimaryKey\" parameterType=\"" + ConvertUtil.convertFieldTypePath(pkColumn.getColumnType()) + "\">\r\n");
-        sb.append("\t\tdelete from " + _table.getTableName() + "\r\n");
-        sb.append("\t\twhere " + pkColumn.getColumnName() + " = #{" + pkColumn.getFieldName() + "}\r\n");
+        sb.append("\t\tdelete from `" + _table.getTableName() + "`\r\n");
+        sb.append("\t\twhere `" + pkColumn.getColumnName() + "` = #{" + pkColumn.getFieldName() + "}\r\n");
         sb.append("\t</delete>\r\n");
         sb.append("\r\n");
 
         //================================== create update =====================================//
         sb.append("\t<update id=\"updateByPrimaryKeySelective\" parameterType=\"" + entityPackageName + "." + _table.getObjectName() + "\">\r\n");
-        sb.append("\t\tupdate " + _table.getTableName() + "\r\n");
+        sb.append("\t\tupdate `" + _table.getTableName() + "`\r\n");
         sb.append("\t\t<set>\r\n");
         String pkFiledName = null, pkFiledColumn = null;
         for (int i = 0; i < size; i++) {
@@ -293,7 +344,7 @@ public class MapperTemplate extends BaseTemplate {
                 String _ex = (columnList.get(i).getFk()) ?
                         ("." + columnList.get(i).getFkExclusiveChildFieldName()) : "";
                 sb.append("\t\t\t<if test=\"" + _property + " != null\">");
-                sb.append(tColumn.getColumnName() + " = #{" + (_property + _ex) + "},</if>\r\n");
+                sb.append("`" + tColumn.getColumnName() + "` = #{" + (_property + _ex) + "},</if>\r\n");
             }
         }
         sb.append("\t\t</set>\r\n");
@@ -301,26 +352,26 @@ public class MapperTemplate extends BaseTemplate {
         sb.append("\t</update>\r\n");
         sb.append("\r\n");
 
-        sb.append("\t<update id=\"updateByPrimaryKey\" parameterType=\"" + entityPackageName + "." + _table.getObjectName() + "\">\r\n");
-        sb.append("\t\tupdate " + _table.getTableName() + "\r\n");
-        sb.append("\t\tset \r\n");
-        for (int i = 0; i < size; i++) {
-            Column _tColumn = columnList.get(i);
-            if (!_tColumn.getColumnName().equals(pkName)) {
-                String _property = (columnList.get(i).getFk()) ?
-                        columnList.get(i).getFkExclusiveObjectName() : columnList.get(i).getFieldName();
-                String _ex = (columnList.get(i).getFk()) ?
-                        ("." + columnList.get(i).getFkExclusiveChildFieldName()) : "";
-                sb.append("\t\t\t" + _tColumn.getColumnName() + " = #{" + (_property + _ex) + "}");
-                if (i != size - 1) {
-                    sb.append(",");
-                }
-                sb.append("\r\n");
-            }
-        }
-        sb.append("\t\twhere " + pkFiledColumn + " = #{" + pkFiledName + "}\r\n");
-        sb.append("\t</update>\r\n");
-        sb.append("\r\n");
+        //sb.append("\t<update id=\"updateByPrimaryKey\" parameterType=\"" + entityPackageName + "." + _table.getObjectName() + "\">\r\n");
+        //sb.append("\t\tupdate " + _table.getTableName() + "\r\n");
+        //sb.append("\t\tset \r\n");
+        //for (int i = 0; i < size; i++) {
+        //    Column _tColumn = columnList.get(i);
+        //    if (!_tColumn.getColumnName().equals(pkName)) {
+        //        String _property = (columnList.get(i).getFk()) ?
+        //                columnList.get(i).getFkExclusiveObjectName() : columnList.get(i).getFieldName();
+        //        String _ex = (columnList.get(i).getFk()) ?
+        //                ("." + columnList.get(i).getFkExclusiveChildFieldName()) : "";
+        //        sb.append("\t\t\t" + _tColumn.getColumnName() + " = #{" + (_property + _ex) + "}");
+        //        if (i != size - 1) {
+        //            sb.append(",");
+        //        }
+        //        sb.append("\r\n");
+        //    }
+        //}
+        //sb.append("\t\twhere " + pkFiledColumn + " = #{" + pkFiledName + "}\r\n");
+        //sb.append("\t</update>\r\n");
+        //sb.append("\r\n");
 
         //================================== create select =====================================//
         //" + DbHelper.convertFieldTypePath(pkColumn.getNameType()) + "
@@ -328,15 +379,46 @@ public class MapperTemplate extends BaseTemplate {
                 "parameterType=\"" + ConvertUtil.convertFieldTypePath(pkColumn.getColumnType()) + "\">\r\n");
         sb.append("\t\tselect\r\n");
         sb.append("\t\t<include refid=\"" + _columnList + "\"/>\r\n");
-        sb.append("\t\tfrom " + _table.getTableName() + "\r\n");
-        sb.append("\t\twhere " + pkFiledColumn + " = #{" + pkFiledName + "}\r\n");
+        sb.append("\t\tfrom `" + _table.getTableName() + "`\r\n");
+        sb.append("\t\twhere `" + pkFiledColumn + "` = #{" + pkFiledName + "}\r\n");
         sb.append("\t</select>\r\n");
         sb.append("\r\n");
         sb.append("\t<!-- new create method   -->");
+        sb.append("\t\r\n");
         sb.append("\r\n");
+
+    //================================== create selectByAllOrKeyword =====================================//
+        sb.append("\t<select id=\"selectByAllOrKeyword\" resultMap=\""+_resultMap+"\"  " +
+                "parameterType=\"map\">\r\n\r\n");
+
+        sb.append("\t</select>\r\n");
         sb.append("\r\n");
-        sb.append("</mapper>\r\n");
-    }
+
+    //================================== create selectByObj =====================================//
+        sb.append("\t<select id=\"selectByObj\" resultMap=\""+_resultMap+"\"  " +
+                "parameterType=\"map\">\r\n\r\n");
+
+        sb.append("\t</select>\r\n");
+        sb.append("\r\n");
+    //================================== create select count =====================================//
+        sb.append("\t<select id=\"count\" resultType = \"java.lang.Integer\" " +
+                "parameterType=\"java.lang.String\">\r\n\r\n");
+
+        sb.append("\t</select>\r\n");
+        sb.append("\r\n");
+
+    //================================== create isRename =====================================//
+        sb.append("\t<select id=\"isRename\" resultType = \"java.lang.Integer\" " +
+                "parameterType=\"" + entityPackageName + "." + _table.getObjectName() + "\">\r\n\r\n");
+
+        sb.append("\t</select>\r\n");
+        sb.append("\r\n");
+    //================================== create upStatus =====================================//
+        sb.append("\t<update id=\"upStatus\" parameterType=\"" + entityPackageName + "." + _table.getObjectName() + "\">\r\n\r\n");
+        sb.append("\t</update>\r\n");
+        sb.append("\r\n");
     // ============================================== create Mapper xml method end ============================================== //
 
+        sb.append("</mapper>\r\n");
+    }
 }
