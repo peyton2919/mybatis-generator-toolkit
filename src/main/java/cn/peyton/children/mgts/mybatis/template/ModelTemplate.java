@@ -65,7 +65,6 @@ public class ModelTemplate extends BaseTemplate {
             createModelClass(objName,prefix,prefixResult);
         }
 
-
         //调用父类方法保存文件
         createFileContent(packageName, ((objName == null) ? table.getObjectName():objName), "java");
         return sb.toString();

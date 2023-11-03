@@ -278,14 +278,7 @@ public class CreateSQLUtil {
 		}
 		return sb.toString();
 	}
-	
-	
-	
-	
-	
-	
-	
-	
+
 	/**
 	 * <h4>生成查询SQL语句</h4>
 	 * @param tableName 表名

@@ -18,10 +18,10 @@ public final class ExecutePlumMall {
     public static String POJO = "cn.peyton.plum.mall.pojo";
     public static String MAPPER = "cn.peyton.plum.mall.mapper";
     public static String PARAM = "cn.peyton.plum.mall.param";
-    public static String PATH = "f:/mall1/";
+    public static String PATH = "f:/mall/";
 
    public static void main(String[] args){
-       DatabaseUtil databaseUtil =new DatabaseUtil("db_mall-1");
+       DatabaseUtil databaseUtil =new DatabaseUtil("db_mall");
        Generation generation = new Generation(databaseUtil);
        //generation.create("adsense",null,PATH,MAPPER,POJO,false);
 

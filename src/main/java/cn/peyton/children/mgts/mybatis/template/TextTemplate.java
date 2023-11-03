@@ -41,7 +41,7 @@ public class TextTemplate extends BaseTemplate{
 
     /**
      * <h4>创建多个[当前 库下所有表]</h4>
-     * @param removePrefix      去除前缀
+     * @param removePrefix      移除对象名前缀(sys_,tb_)
      * @param path              绝对路径
      * @param mapperPackageName mapper包路径
      * @param entityPackageName entity包路径
@@ -131,7 +131,9 @@ public class TextTemplate extends BaseTemplate{
      * @param isAll true 输出service 与 controller
      */
     private static void single(Table table,String path, String mapperPackageName, String entityPackageName, boolean isAll) {
+        //创建 实体类
         ModelTemplate.create(table,null,null,null, path, entityPackageName);
+        //创建 Mapper类
         MapperTemplate.create(table,path,mapperPackageName,entityPackageName);
 
         //isAll 为true 时创建 Service 与 Controller
@@ -140,8 +142,10 @@ public class TextTemplate extends BaseTemplate{
             StringBuffer tSb = new StringBuffer(mapperPackageName);
             tSb.delete(tLocation + 1, mapperPackageName.length());
             String importPackagePrefix = tSb.toString();
+            //创建 service 层
             ServiceTemplate.create(table.getObjectName(),table.getComment(),path,mapperPackageName,
                     importPackagePrefix + "service");
+            //创建 Controller 层
             ControllerTemplate.create(table.getObjectName(),table.getComment(),path,importPackagePrefix,
                     importPackagePrefix + "controller");
         }

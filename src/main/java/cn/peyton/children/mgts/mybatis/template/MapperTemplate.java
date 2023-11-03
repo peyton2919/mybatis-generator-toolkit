@@ -40,6 +40,7 @@ public class MapperTemplate extends BaseTemplate {
             sb.append("package " + packageName + ";\r\n\r\n");
         }
         sb.append("import " + entityPackageName + "." + _table.getObjectName() + ";\r\n\r\n");
+        sb.append("import org.apache.ibatis.annotations.Param;\r\n\r\n");
         createAnnotation(commentName + " Mapper 接口");
         createMapperClass();
         createFileContent(packageName, _table.getObjectName() + "Mapper", "java");

@@ -18,7 +18,7 @@ public final class ExecuteCommunity {
     public static String POJO = "cn.peyton.children.chatter.pojo";
     public static String MAPPER = "cn.peyton.children.chatter.mapper";
     public static String PARAM = "cn.peyton.children.chatter.param";
-    public static String PATH = "f:/community2/";
+    public static String PATH = "f:/community3/";
 
    public static void main(String[] args){
        DatabaseUtil databaseUtil =new DatabaseUtil("db_chatter");

@@ -68,7 +68,7 @@ public final class DbHelper {
     }
 
     /**
-     * <h3>根据表名获取表对象信息</h3>
+     * <h3>根据单个表名获取表对象信息</h3>
      * @param tableName 表名
      * @return 表对象
      */

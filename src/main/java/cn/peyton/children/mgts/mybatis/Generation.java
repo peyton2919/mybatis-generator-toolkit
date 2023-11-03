@@ -93,7 +93,7 @@ public final class Generation {
 
     /**
      * <h4><h4>创建多个 对象</h4></h4>
-     * @param removePrefix           对象名
+     * @param removePrefix      移除对象名前缀(sys_,tb_)
      * @param path              绝对 路径
      * @param mapperPackageName 数据层类包的地址
      * @param entityPackageName 实体类包的地址
