@@ -20,7 +20,7 @@ public class ExecuteMall {
     public static String PATH = "f:/temp/mall2/";
 
     public static void main(String[] args) {
-        DatabaseUtil util = new DatabaseUtil("db_plum");
+        DatabaseUtil util = new DatabaseUtil("db_mall-1");
         Generation generation = new Generation(util);
         // 全部数据
         // generation.create(null,PATH,MAPPER,POJO,true);

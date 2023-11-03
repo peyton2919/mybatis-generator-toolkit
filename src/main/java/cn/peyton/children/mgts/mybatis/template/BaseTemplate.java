@@ -135,7 +135,7 @@ public abstract class BaseTemplate {
                 }else {
                     fieldResult = fieldName;
                 }
-                int _plen = fieldName.indexOf(prefixParam);
+                int _plen = (null != prefixParam)?fieldName.indexOf(prefixParam):-2;
                 if (_plen > -1) {
                     fieldParam = fieldName.substring(_plen + prefixParam.length());
                     fieldParam = ConvertUtil.toFirstLowerCase(fieldParam);
